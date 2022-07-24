@@ -10,7 +10,8 @@ requires a lot of dev better redo the project as a django app inside saleor
 project for easier testing.
 
 """
-from .utils import graphql_request, graphql_multipart_request, override_dict, handle_errors, get_payload
+from .utils import graphql_request, graphql_multipart_request, override_dict, handle_errors, get_payload, \
+    get_category_payload
 
 
 class ETLDataLoader:
@@ -363,7 +364,7 @@ class ETLDataLoader:
             when productErrors is not an empty list.
         """
         default_kwargs = {
-            "inputType": "DROPDOWN",
+            "type": "PRODUCT_TYPE",
             "name": "default"
         }
 
@@ -374,12 +375,12 @@ class ETLDataLoader:
         }
 
         query = """
-            mutation createAttribute($input: AttributeCreateInput!) {
+            mutation attributeCreate($input: AttributeCreateInput!) {
                 attributeCreate(input: $input) {
                     attribute {
                         id
                     }
-                    productErrors {
+                    attributeErrors {
                         field
                         message
                         code
@@ -391,7 +392,7 @@ class ETLDataLoader:
         response = graphql_request(
             query, variables, self.headers, self.endpoint_url)
 
-        errors = response["data"]["attributeCreate"]["productErrors"]
+        errors = response["data"]["attributeCreate"]["attributeErrors"]
         handle_errors(errors)
 
         return response["data"]["attributeCreate"]["attribute"]["id"]
@@ -430,12 +431,12 @@ class ETLDataLoader:
         }
 
         query = """
-            mutation createAttributeValue($input: AttributeValueCreateInput!, $attribute: ID!) {
+            mutation attributeValueCreate($input: AttributeValueCreateInput!, $attribute: ID!) {
                 attributeValueCreate(input: $input, attribute: $attribute) {
                     attribute{
                         id
                     }
-                    productErrors {
+                    attributeErrors {
                         field
                         message
                         code
@@ -447,7 +448,7 @@ class ETLDataLoader:
         response = graphql_request(
             query, variables, self.headers, self.endpoint_url)
 
-        errors = response["data"]["attributeValueCreate"]["productErrors"]
+        errors = response["data"]["attributeValueCreate"]["attributeErrors"]
         handle_errors(errors)
 
         return response["data"]["attributeValueCreate"]["attribute"]["id"]
@@ -509,7 +510,7 @@ class ETLDataLoader:
 
         return response["data"]["productTypeCreate"]["productType"]["id"]
 
-    def create_category(self, **kwargs):
+    def create_category(self, parent_id, **kwargs):
         """create a category.
 
         Parameters
@@ -536,12 +537,13 @@ class ETLDataLoader:
         override_dict(default_kwargs, kwargs)
 
         variables = {
-            "input": default_kwargs
+            "input": default_kwargs,
+            "parent": parent_id
         }
 
         query = """
-            mutation createCategory($input: CategoryInput!) {
-                categoryCreate(input: $input) {
+            mutation categoryCreate($input: CategoryInput!, $parent: ID) {
+                categoryCreate(input: $input, parent: $parent) {
                     category {
                         id
                     }
@@ -562,7 +564,19 @@ class ETLDataLoader:
 
         return response["data"]["categoryCreate"]["category"]["id"]
 
-    def create_product(self, product_type_id, **kwargs):
+    def create_category_with_image(self, parent_id, file_path, name):
+
+        body = get_category_payload(parent_id=parent_id, file_path=file_path, name=name)
+
+        response = graphql_multipart_request(
+            body, self.headers, self.endpoint_url)
+
+        errors = response["data"]["categoryCreate"]["productErrors"]
+        handle_errors(errors)
+
+        return response["data"]["categoryCreate"]["category"]["id"]
+
+    def create_product(self, input):
         """create a product.
 
         Parameters
@@ -584,22 +598,13 @@ class ETLDataLoader:
         Exception
             when productErrors is not an empty list.
         """
-        default_kwargs = {
-            "name": "default",
-            "description": "default",
-            "productType": product_type_id,
-            "basePrice": 0.0,
-            "sku": "default"
-        }
-
-        override_dict(default_kwargs, kwargs)
 
         variables = {
-            "input": default_kwargs
+            "input": input
         }
 
         query = """
-            mutation createProduct($input: ProductCreateInput!) {
+            mutation productCreate($input: ProductCreateInput!) {
                 productCreate(input: $input) {
                     product {
                         id
@@ -620,6 +625,59 @@ class ETLDataLoader:
         handle_errors(errors)
 
         return response["data"]["productCreate"]["product"]["id"]
+
+    def update_product_channel_listing(self, product_id, input):
+        """create a product.
+
+        Parameters
+        ----------
+        product_type_id : str
+            product type id required to create the product.
+        **kwargs : dict, optional
+            overrides the default value set to create the product refer to
+            the ProductCreateInput graphQL type to know what can be
+            overriden.
+
+        Returns
+        -------
+        id : str
+            the id of the product created.
+
+        Raises
+        ------
+        Exception
+            when productErrors is not an empty list.
+        """
+
+        print(input)
+
+        variables = {
+            "id": product_id,
+            "input": input
+        }
+
+        query = """
+            mutation ProductChannelListingUpdate($id: ID!, $input: ProductChannelListingUpdateInput!) {
+                productChannelListingUpdate(id: $id, input: $input) {
+                    product {
+                        id
+                    }
+                    errors {
+                        field
+                        message
+                        code
+                    }
+                }
+            }
+        """
+
+        response = graphql_request(
+            query, variables, self.headers, self.endpoint_url)
+
+        errors = response["data"]["productChannelListingUpdate"]["errors"]
+        handle_errors(errors)
+
+        return response["data"]["productChannelListingUpdate"]["product"]["id"]
 
     def create_product_variant(self, product_id, **kwargs):
         """create a product variant.
@@ -645,7 +703,6 @@ class ETLDataLoader:
         """
         default_kwargs = {
             "product": product_id,
-            "sku": "0",
             "attributes": []
         }
 
@@ -674,9 +731,90 @@ class ETLDataLoader:
             query, variables, self.headers, self.endpoint_url)
 
         errors = response["data"]["productVariantCreate"]["productErrors"]
+        if len(errors) > 0:
+            return None
+        return response["data"]["productVariantCreate"]["productVariant"]["id"]
+
+    def update_variant_stocks(self, variant_id, stocks):
+
+        variables = {
+            "id": variant_id,
+            "stocks": stocks
+        }
+
+        query = """
+            mutation StockUpdate($id:ID!, $stocks: [StockInput!]!){
+              productVariantStocksUpdate(stocks:$stocks,variantId:$id) {
+                productVariant {
+                  id
+                }
+                errors {
+                  field
+                  message
+                  code
+                }
+              }
+            }
+        """
+
+        response = graphql_request(
+            query, variables, self.headers, self.endpoint_url)
+
+        errors = response["data"]["productVariantStocksUpdate"]["errors"]
+        if len(errors) > 0:
+            return None
+        return response["data"]["productVariantStocksUpdate"]["productVariant"]["id"]
+
+    def update_variant_channel_listing(self, variant_id, input):
+        """create a product variant.
+
+        Parameters
+        ----------
+        product_id : str
+            id for which the product variant will be created.
+        **kwargs : dict, optional
+            overrides the default value set to create the product variant refer
+            to the ProductVariantCreateInput graphQL type to know what can be
+            overriden.
+
+        Returns
+        -------
+        id : str
+            the id of the product variant created.
+
+        Raises
+        ------
+        Exception
+            when productErrors is not an empty list.
+        """
+
+        variables = {
+            "id": variant_id,
+            "input": input
+        }
+
+        query = """
+            mutation ProductVariantChannelListingUpdate($id: ID!, $input: [ProductVariantChannelListingAddInput!]!) {
+                productVariantChannelListingUpdate(id: $id, input: $input) {
+                    variant {
+                      id
+                    }
+                    errors {
+                        field
+                        message
+                        code
+                    }
+                }
+            }
+        """
+
+        response = graphql_request(
+            query, variables, self.headers, self.endpoint_url)
+
+        errors = response["data"]["productVariantChannelListingUpdate"]["errors"]
         handle_errors(errors)
 
-        return response["data"]["productVariantCreate"]["productVariant"]["id"]
+        return response["data"]["productVariantChannelListingUpdate"]["variant"]["id"]
 
     def create_product_image(self, product_id, file_path):
         """create a product image.
@@ -703,10 +841,10 @@ class ETLDataLoader:
         response = graphql_multipart_request(
             body, self.headers, self.endpoint_url)
 
-        errors = response["data"]["productImageCreate"]["productErrors"]
+        errors = response["data"]["productMediaCreate"]["errors"]
         handle_errors(errors)
 
-        return response["data"]["productImageCreate"]["image"]["id"]
+        return response["data"]["productMediaCreate"]["media"]["id"]
 
     def create_customer_account(self, **kwargs):
         """
@@ -787,8 +925,8 @@ class ETLDataLoader:
         response = graphql_request(query, variables, self.headers, self.endpoint_url)
 
         if (
-            len(response["data"]["updatePrivateMetadata"]["item"]["privateMetadata"])
-            > 0
+                len(response["data"]["updatePrivateMetadata"]["item"]["privateMetadata"])
+                > 0
         ):
             return item_id
         else:

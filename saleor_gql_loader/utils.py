@@ -5,11 +5,12 @@ Notes
 The function defined here must be context and implementation independant, for
 easy reusability
 """
-import requests
 import json
 from pathlib import Path
-from requests_toolbelt import MultipartEncoder
+
+import requests
 from django.core.serializers.json import DjangoJSONEncoder
+from requests_toolbelt import MultipartEncoder
 
 GQL_DEFAULT_ENDPOINT = "http://localhost:8000/graphql/"
 
@@ -50,6 +51,7 @@ def graphql_request(query, variables={}, headers={},
         }
     )
 
+    print("response ", response.text)
     parsed_response = json.loads(response.text)
     if response.status_code != 200:
         raise Exception("{message}\n extensions: {extensions}".format(
@@ -117,7 +119,8 @@ def override_dict(a, overrides):
         try:
             if type(a[key]) == dict:
                 print(
-                    "**warning**: key '{}' contained a dict make sure to override each value in the nested dict.".format(key))
+                    "**warning**: key '{}' contained a dict make sure to override each value in the nested dict.".format(
+                        key))
         except KeyError:
             pass
         a[key] = val
@@ -142,6 +145,7 @@ def handle_errors(errors):
             "{field} : {message}".format(**error) for error in errors]
         raise Exception("\n".join(txt_list))
 
+
 def get_operations(product_id):
     """Get ProductImageCreate operations
 
@@ -157,11 +161,11 @@ def get_operations(product_id):
     """
     query = """
         mutation ProductImageCreate($product: ID!, $image: Upload!, $alt: String) {
-            productImageCreate(input: {alt: $alt, image: $image, product: $product}) {
-                image{
+            productMediaCreate(input: {alt: $alt, image: $image, product: $product}) {
+                media {
                     id
                 }
-                productErrors {
+                errors {
                     field
                     message
                 }
@@ -174,6 +178,45 @@ def get_operations(product_id):
         "alt": ''
     }
     return {"query": query, "variables": variables}
+
+
+def get_category_operations(parent_id, file_path, name):
+    """Get ProductImageCreate operations
+
+    Parameters
+    ----------
+    parent_id : str
+            id for which the product image will be created.
+
+    Returns
+    -------
+    query : str
+    variables: dict
+    """
+
+    query = """
+                mutation categoryCreate($name: String!, $image: Upload!, $parent: ID) {
+                    categoryCreate(input: {name: $name, backgroundImage: $image}, parent: $parent) {
+                        category {
+                            id
+                        }
+                        productErrors {
+                            field
+                            message
+                            code
+                        }
+                    }
+                }
+            """
+
+    variables = {
+        "name": name,
+        "image": "0",
+        "parent": parent_id
+    }
+
+    return {"query": query, "variables": variables}
+
 
 def get_payload(product_id, file_path):
     """Get ProductImageCreate operations
@@ -191,6 +234,28 @@ def get_payload(product_id, file_path):
     return {
         "operations": json.dumps(
             get_operations(product_id), cls=DjangoJSONEncoder
+        ),
+        "map": json.dumps({'0': ["variables.image"]}, cls=DjangoJSONEncoder),
+        "0": (Path(file_path).name, open(file_path, 'rb'), 'image/png')
+    }
+
+
+def get_category_payload(parent_id, name, file_path):
+    """Get ProductImageCreate operations
+
+    Parameters
+    ----------
+    parent_id : str
+            id for which the product image will be created.
+
+    Returns
+    -------
+    query : str
+    variables: dict
+    """
+    return {
+        "operations": json.dumps(
+            get_category_operations(parent_id=parent_id, name=name, file_path=file_path), cls=DjangoJSONEncoder
         ),
         "map": json.dumps({'0': ["variables.image"]}, cls=DjangoJSONEncoder),
         "0": (Path(file_path).name, open(file_path, 'rb'), 'image/png')

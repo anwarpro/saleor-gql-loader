@@ -1,0 +1,300 @@
+[
+  {
+    "image": "https:\/\/musafira2z.com\/public\/uploads\/all\/nMNtVnmyNMLvG4RLi5Em51rgXJeUHeyC8p2kcNf5.jpg",
+    "name": "FRUITS & VEGETABLES",
+    "id": 80,
+    "child": [
+      {
+        "image": "https:\/\/musafira2z.com\/public\/uploads\/all\/nMNtVnmyNMLvG4RLi5Em51rgXJeUHeyC8p2kcNf5.jpg",
+        "name": "FRUITS",
+        "id": 81
+      },
+      {
+        "image": null,
+        "name": "VEGETABLES",
+        "id": 83
+      }
+    ]
+  },
+  {
+    "image": "https:\/\/musafira2z.com\/public\/uploads\/all\/1aATiv7iZ8hD0NID6Sc0UGsGkjaVQbDMYaZ4KXHx.png",
+    "name": "DRINKS & COFFEE",
+    "id": 84,
+    "child": [
+      {
+        "image": null,
+        "name": "DRINKS",
+        "id": 85,
+        "child": [
+          {
+            "image": null,
+            "name": "JUICE",
+            "id": 88
+          },
+          {
+            "image": "https:\/\/musafira2z.com\/public\/uploads\/all\/AsaZB6fyGHWBX4kDNLPE9dNq3i5lU2Jrqiyjh9l0.png",
+            "name": "ENERGY DRINKS",
+            "id": 144
+          }
+        ]
+      },
+      {
+        "image": null,
+        "name": "COFFEE",
+        "id": 86,
+        "child": [
+          {
+            "image": null,
+            "name": "TEA",
+            "id": 87
+          }
+        ]
+      },
+      {
+        "image": "https:\/\/musafira2z.com\/public\/uploads\/all\/62hmIJ7gGQhxFcbtlpHRJQcvuwm5ko5UVw58MsMA.png",
+        "name": "DAIRY PRODUCTS",
+        "id": 133
+      }
+    ]
+  },
+  {
+    "image": "https:\/\/musafira2z.com\/public\/uploads\/all\/bQZYkAXijIgesY20cbkAuXcyuGNzgl3sole2ytRs.png",
+    "name": "FOODS",
+    "id": 89,
+    "child": [
+      {
+        "image": null,
+        "name": "FRESH FOOD",
+        "id": 97
+      },
+      {
+        "image": "https:\/\/musafira2z.com\/public\/uploads\/all\/7QSlkoePgzcx3j4BDCEakTlK1puZqMTPOwCiyU1p.png",
+        "name": "BANGLA FOODS",
+        "id": 99
+      },
+      {
+        "image": "https:\/\/musafira2z.com\/public\/uploads\/all\/dj7ocvCz7zLDWMxtGjQsy9YCXC6rI1ra5S3oRh7E.jpg",
+        "name": "FROZEN FOOD",
+        "id": 100
+      },
+      {
+        "image": "https:\/\/musafira2z.com\/public\/uploads\/all\/d3CKXL2ajpNuBvLirb6ls1CMoYZs82kRRdMDO9Fb.png",
+        "name": "CEREAL",
+        "id": 134
+      },
+      {
+        "image": "https:\/\/musafira2z.com\/public\/uploads\/all\/GoVjU2Q54YPmMfHQNZL07uyBkYZW20IGfZwaanM4.png",
+        "name": "BAKING PRODUCTS",
+        "id": 135
+      },
+      {
+        "image": "https:\/\/musafira2z.com\/public\/uploads\/all\/QZa74SW1SzDE4DnHytwxxsRIw0Lg5ekuNj3NQtZa.png",
+        "name": "HERBS & SPICE",
+        "id": 136
+      },
+      {
+        "image": null,
+        "name": "BISCUITS",
+        "id": 146
+      },
+      {
+        "image": "https:\/\/musafira2z.com\/public\/uploads\/all\/kWg23dwqZMr7tfQyLnwJwcVwM3DVrX1EZGM0437W.jpg",
+        "name": "spicy",
+        "id": 147
+      }
+    ]
+  },
+  {
+    "image": "https:\/\/musafira2z.com\/public\/uploads\/all\/yLxMzwUInOp3ldRqJ4sMCWdAc0Z4UgklafCoxnOz.png",
+    "name": "HOUSEHOLD & HARDWARE",
+    "id": 90,
+    "child": [
+      {
+        "image": "https:\/\/musafira2z.com\/public\/uploads\/all\/ecabncPRFK4gd2h002Xze3tAybMgs7qNzRXLuJWZ.jpg",
+        "name": "HOUSEHOLD",
+        "id": 101,
+        "child": [
+          {
+            "image": "https:\/\/musafira2z.com\/public\/uploads\/all\/Lveiepu4WMnrgjT2v9gPA7PNup0lzvwqCVAPWgq5.png",
+            "name": "KITCHEN",
+            "id": 104
+          },
+          {
+            "image": null,
+            "name": "LAUNDRY",
+            "id": 105
+          }
+        ]
+      },
+      {
+        "image": "https:\/\/musafira2z.com\/public\/uploads\/all\/H44QzeKOshH2dRkrPmjI53mHSpKGLrFbsKcHhea8.png",
+        "name": "HARDWARE",
+        "id": 102
+      }
+    ]
+  },
+  {
+    "image": "https:\/\/musafira2z.com\/public\/uploads\/all\/mNjU7a4cI2z0XqFPjz6yAw05FPb44S2JXWmInPfr.png",
+    "name": "HEALTH & BEAUTY",
+    "id": 91,
+    "child": [
+      {
+        "image": "https:\/\/musafira2z.com\/public\/uploads\/all\/4mxObdd1xwzUrS8fjoG3rAt4pHorNhg6ISnSsHxV.jpg",
+        "name": "WOMENS PRODUCTS",
+        "id": 107
+      },
+      {
+        "image": "https:\/\/musafira2z.com\/public\/uploads\/all\/yl6FX03LvtOExbodXesy9Xvzoq5B8y4hjO3yIl4T.png",
+        "name": "COSMETICS",
+        "id": 108
+      },
+      {
+        "image": "https:\/\/musafira2z.com\/public\/uploads\/all\/GX5C1FByjJafHk8O2QbCvoMS1GyVO0qHINQFvl61.jpg",
+        "name": "MENS PRODUCTS",
+        "id": 130
+      },
+      {
+        "image": "https:\/\/musafira2z.com\/public\/uploads\/all\/tF5OI5029BLDLLm5FKW8GOyyp6P3lLPgHUvU8mQ7.png",
+        "name": "MEDICAL SUPPLIES",
+        "id": 139
+      },
+      {
+        "image": "https:\/\/musafira2z.com\/public\/uploads\/all\/rQhYpu6pr3goEU65SuX9CUOBDmsHkteFsIL6Tg4z.png",
+        "name": "BATHROOM SUPPLIES",
+        "id": 142
+      }
+    ]
+  },
+  {
+    "image": "https:\/\/musafira2z.com\/public\/uploads\/all\/7AisJCfZeFXN3rOHjfhwfRSuq091tVN7emAIortk.png",
+    "name": "ELECTRONICS & MOBILE ACCESSORIES",
+    "id": 92,
+    "child": [
+      {
+        "image": "https:\/\/musafira2z.com\/public\/uploads\/all\/ecabncPRFK4gd2h002Xze3tAybMgs7qNzRXLuJWZ.jpg",
+        "name": "ELECTRONICS",
+        "id": 119
+      },
+      {
+        "image": "https:\/\/musafira2z.com\/public\/uploads\/all\/WA4rE7NomN0hklFYLFLjfvvOadV9lCjg300FOUGs.png",
+        "name": "MOBILE ACCESSORIES",
+        "id": 138
+      }
+    ]
+  },
+  {
+    "image": "https:\/\/musafira2z.com\/public\/uploads\/all\/oHuJner9Ne2JqxRbUgAP5ey4KEKNbRVW2iGI60zX.png",
+    "name": "BABY",
+    "id": 93,
+    "child": [
+      {
+        "image": "https:\/\/musafira2z.com\/public\/uploads\/all\/aqOFHVBG0xCuYCKlbJclQjTu7qhxEqqPkYYStdSq.jpg",
+        "name": "KIDS TOYS",
+        "id": 122
+      },
+      {
+        "image": "https:\/\/musafira2z.com\/public\/uploads\/all\/DZZc9W6ahjNHzCr90oflD9GEYmJnIu1box5Yobk2.jpg",
+        "name": "BABY FOOD",
+        "id": 123
+      },
+      {
+        "image": "https:\/\/musafira2z.com\/public\/uploads\/all\/Y1Gp7c1uZf8HxqaicSUTMzNPyCO3zuqYXvtVxdo7.png",
+        "name": "BABIES HEALTH",
+        "id": 125
+      },
+      {
+        "image": "https:\/\/musafira2z.com\/public\/uploads\/all\/oHuJner9Ne2JqxRbUgAP5ey4KEKNbRVW2iGI60zX.png",
+        "name": "BABIES DIAPERS",
+        "id": 126
+      }
+    ]
+  },
+  {
+    "image": "https:\/\/musafira2z.com\/public\/uploads\/all\/ZtU7hPQIQJCOVPhqobkr70Bf1UBDcGibMEXzSgL5.png",
+    "name": "CHIPS & SWEETS",
+    "id": 94,
+    "child": [
+      {
+        "image": null,
+        "name": "CHIPS",
+        "id": 113
+      },
+      {
+        "image": null,
+        "name": "SWEETS",
+        "id": 114
+      },
+      {
+        "image": null,
+        "name": "CHOCOLATES",
+        "id": 115
+      },
+      {
+        "image": "https:\/\/musafira2z.com\/public\/uploads\/all\/9J9UW4x7kB2njUs18Lpe1q8vEt2S2fAXqUfdSPaS.png",
+        "name": "NUTS & CAKES",
+        "id": 145
+      }
+    ]
+  },
+  {
+    "image": "https:\/\/musafira2z.com\/public\/uploads\/all\/VnTA7GMBQDGprkosDXIF548dPh9QkBOsMh3inSF7.png",
+    "name": "SPORTS & STATIONERY",
+    "id": 95,
+    "child": [
+      {
+        "image": "https:\/\/musafira2z.com\/public\/uploads\/all\/l67HNDxUOzIppgcoAKQKQzOy0iozzFuhDzUJ2J66.jpg",
+        "name": "SPORTS",
+        "id": 116
+      },
+      {
+        "image": null,
+        "name": "STATIONERY",
+        "id": 117
+      }
+    ]
+  },
+  {
+    "image": "https:\/\/musafira2z.com\/public\/uploads\/all\/5Op7nZXoLbfs7bkSJgcRrVIqikoMw07cQzy4sk3x.png",
+    "name": "TOBACCO & CIGARETTES",
+    "id": 96,
+    "child": [
+      {
+        "image": "https:\/\/musafira2z.com\/public\/uploads\/all\/zAXD57Q6JEyT2uzWx8W0zTgACh7CbGfQKft2bLvs.png",
+        "name": "CIGARETTES",
+        "id": 120
+      },
+      {
+        "image": "https:\/\/musafira2z.com\/public\/uploads\/all\/7GUVvlShXcEXKa4kqARudWt6g1g9tGr4jnHMOaXJ.png",
+        "name": "TOBACCO",
+        "id": 140
+      },
+      {
+        "image": "https:\/\/musafira2z.com\/public\/uploads\/all\/WLKSlqFBvBHUf5pmzoc5fy5qKRYcRzyY69xOV2oF.png",
+        "name": "HOOKAH PIPES (NOT SOLD TO PERSONS UNDER THE AGE OF",
+        "id": 141
+      },
+      {
+        "image": "https:\/\/musafira2z.com\/public\/uploads\/all\/foEH9PTpKnDDC8mNLlXcPtfUGsC3UxdIQHpHNPzH.png",
+        "name": "TOBACCO AND CIGARETTES ACCESSORIES",
+        "id": 143
+      }
+    ]
+  },
+  {
+    "image": "https:\/\/musafira2z.com\/public\/uploads\/all\/jg0EqR9RHpRm2cdqMTtgowXjur59ZySHKibeKbk8.jpg",
+    "name": "China shop",
+    "id": 106
+  },
+  {
+    "image": "https:\/\/musafira2z.com\/public\/uploads\/all\/rqPIHNyF2PzriYrMSMi13f5JLAjvnESo0QncnkHc.jpg",
+    "name": "Pets",
+    "id": 148,
+    "child": [
+      {
+        "image": "https:\/\/musafira2z.com\/public\/uploads\/all\/rqPIHNyF2PzriYrMSMi13f5JLAjvnESo0QncnkHc.jpg",
+        "name": "Dog Food",
+        "id": 150
+      }
+    ]
+  }
+]
